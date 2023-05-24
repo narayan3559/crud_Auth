@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 8000
 const db = require('./config/user')
+const cors = require('cors')
 const user_model = require('./models/user_collection')
 const jwt = require('jsonwebtoken')
 const PRIVATE_KEY = '02Ni@wBb4Eu2'
@@ -11,12 +12,14 @@ const otpGenerator = require('otp-generator')
 
 app.use(express.json())
 db()
+app.use(cors())
 
 app.post("/register", async(req, res) => {
   const { email } = req.body;
+  console.log(req.body.password);
   const user = await user_model.findOne({ email })
   if (user) {
-    return res.status(400).json({ error: "User already exist" })
+    return res.status(400).json({ error: "User Already Exist" })
   }
   const { username } = req.body;
   const userr = await user_model.findOne({ username });
