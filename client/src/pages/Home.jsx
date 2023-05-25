@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
-import Topbar from '../components/Topbar';
+import React from 'react'
 
 function Home() {
   return (
     <>
-      <Topbar />
       <div>Home</div>
     </>
   );

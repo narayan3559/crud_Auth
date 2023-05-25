@@ -1,26 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom";
 
 const Topbar = () => {
-  const [auth, setAuth] = useState("")
   const navigate = useNavigate()
-  const auth1= localStorage.getItem("userdata")
+  const auth= localStorage.getItem("userdata")
   useEffect(() => {
-    setAuth(auth1)
-}, [auth,auth1])
-
-  // useEffect(() => {
-  //   const handleStorageChange = () => {
-  //     setAuth(localStorage.getItem("userdata"));
-  //     console.log(auth);
-  //   };
-
-  //   window.addEventListener("storage", handleStorageChange);
-
-  //   return () => {
-  //     window.removeEventListener("storage", handleStorageChange);
-  //   };
-  // });
+}, [auth])
 
   const logout = async () => {
     localStorage.removeItem('userdata');

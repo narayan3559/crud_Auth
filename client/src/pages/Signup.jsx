@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Topbar from "../components/Topbar";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -26,7 +25,6 @@ const Signup = () => {
       if (response.ok) {
         const data = await response.json()
         console.log(data);
-        // localStorage.setItem("user", JSON.stringify(data))
         navigate('/login')
       } else {
         const errorData = await response.json();
@@ -40,7 +38,6 @@ const Signup = () => {
 
   return (
     <>
-      <Topbar />
       <Container>
         <Title>Signup</Title>
         {error && <ErrorText>{error}</ErrorText>}

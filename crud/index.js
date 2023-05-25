@@ -233,8 +233,8 @@ app.put("/update/:username", (req, res) => {
     });
 })
 
-app.get('/fetch/:username', (req, res) => {
-  let fetchusername = req.params.username
+app.post('/fetch/', (req, res) => {
+  let fetchusername = req.body.username
   user_model
     .find({ username: fetchusername })
     .then((data) => {

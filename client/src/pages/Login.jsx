@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Topbar from "../components/Topbar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -38,7 +37,6 @@ const Login = () => {
 
   return (
     <>
-    <Topbar />
     <Container>
       <Title>Login</Title>
       {error && <ErrorText>{error}</ErrorText>}

@@ -8,16 +8,13 @@ import View from './pages/View'
 import Edit from './pages/Edit'
 import Delete from './pages/Delete'
 import Home from './pages/Home'
-// import Topbar from './components/Topbar'
+import Topbar from './components/Topbar'
 
 const App = () => {
-  // const auth1 = localStorage.getItem("userdata");
-  // const [show, setShow] = useState(false);
-
   return (
     <div className="app">
       <BrowserRouter>
-        {/* <Topbar show={(show, setShow)} /> */}
+        <Topbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route element={<PrivateCom />}>
