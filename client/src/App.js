@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import View from './pages/View'
 import Edit from './pages/Edit'
 import Delete from './pages/Delete'
+import Changepassword from './pages/Changepassword'
 import Home from './pages/Home'
 import Topbar from './components/Topbar'
 
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/fetch" element={<View />} />
             <Route path="/update" element={<Edit />} />
             <Route path="/delete" element={<Delete />} />
+            <Route path="/changePassword" element={<Changepassword />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

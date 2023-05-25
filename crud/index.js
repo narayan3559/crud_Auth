@@ -16,7 +16,7 @@ app.use(cors())
 
 app.post("/register", async(req, res) => {
   const { email } = req.body;
-  console.log(req.body.password);
+  console.log("regis", req.body.password);
   const user = await user_model.findOne({ email })
   if (user) {
     return res.status(400).json({ error: "User Already Exist" })
@@ -33,6 +33,7 @@ app.post("/register", async(req, res) => {
 
 app.post("/login", async (req, res) => {
   if (req.body.password && req.body.email) {
+    console.log("login",req.body.password);
     const user = await user_model.findOne({ email: req.body.email })
     if (user) {
       let epass = req.body.password
@@ -60,7 +61,7 @@ app.post("/login", async (req, res) => {
   }
 })
 
-app.put("/changePassword", async (req, res) => {
+app.post("/changePassword", async (req, res) => {
   const { email, oldPassword, newPassword } = req.body
   const user = await user_model.findOne({ email })
 
@@ -71,28 +72,28 @@ app.put("/changePassword", async (req, res) => {
   if (oldPassword && newPassword) {
     bcrypt.compare(oldPassword, user.password, async (err, result) => {
       if (err) {
-        res.send("Something went wrong, try again!")
+        res.send("Something went wrong, try again!");
       } else if (result) {
-          if (oldPassword === newPassword) {
-            return res
-              .status(400)
-              .json({
-                error: "New password cannot be the same as the old password",
-              });
-          }
-        let newpass = newPassword
-        const salt = await bcrypt.genSalt()
-        newpass = await bcrypt.hash(newpass, salt)
+        if (oldPassword === newPassword) {
+          return res.status(400).json({
+            error: "New password cannot be the same as the old password",
+          });
+        }
+        let newpass = newPassword;
+        const salt = await bcrypt.genSalt();
+        newpass = await bcrypt.hash(newpass, salt);
 
         await user_model.findByIdAndUpdate(user._id, {
           password: newpass,
-        })
+        });
 
-        res.send("Changed password successfully")
+        res.status(200).json("Changed Password Succesfully");
       } else {
-        res.status(400).json({ error: "Incorrect old password" })
+        res.status(400).json({ error: "Incorrect old password" });
       }
-    })
+    });
+  } else {
+    res.status(400).json({ error: "Input field cant be empty" });
   }
 })
 

@@ -30,6 +30,9 @@ const Topbar = () => {
               <li>
                 <Link to="/delete">Delete</Link>
               </li>
+              <li>
+                <Link to="/changePassword">Change Password</Link>
+              </li>
             </>
           ) : null}
         </ul>
@@ -47,7 +50,7 @@ const Topbar = () => {
             </>
           ) : (
             <li>
-              <Link onClick={() =>logout()} to={"/"}>
+              <Link onClick={() => logout()} to={"/"}>
                 Logout
               </Link>
             </li>
