@@ -27,9 +27,9 @@ const Topbar = () => {
               <li>
                 <Link to="/update">Edit</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/delete">Delete</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/changePassword">Change Password</Link>
               </li>

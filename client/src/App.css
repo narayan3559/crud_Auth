@@ -4,6 +4,7 @@ body{
 }
 .app {
   height: 100vh !important;
+  background-color: #80a0a1;
 }
 
 /* topbar */
@@ -24,4 +25,10 @@ body{
 a:-webkit-any-link{
   color: white;
   text-decoration: none;
+}
+
+.forgot {
+  display: flex;
+  margin-top: 15px !important;
+  color: rgb(55, 55, 175) !important;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Changepassword = () => {
   const [email, setEmail] = useState("");
@@ -7,6 +8,8 @@ const Changepassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate()
+
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
@@ -25,6 +28,8 @@ const Changepassword = () => {
       if (response.ok) {
         setSuccessMessage(data.message)
         setErrorMessage("")
+        localStorage.removeItem('userdata')
+        navigate('/')
       } else {
         setErrorMessage(data.error);
         setSuccessMessage("");

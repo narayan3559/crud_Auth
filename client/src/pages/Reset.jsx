@@ -1,30 +1,35 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate, Link   } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Reset = () => {
+  const [newPassword, setNewPassword] = useState("");
+  const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate()
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
+  const token = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(token);
     try {
-      const response = await fetch("http://localhost:8000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        `http://localhost:8000/forgot/reset/${token.token}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ otp, newPassword }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
+        setSuccessMessage(data.message);
         console.log(data);
-        localStorage.setItem('userdata', JSON.stringify(data))
-        navigate('/')
+        navigate("/login");
       } else {
         const errorData = await response.json();
         setError(errorData.error);
@@ -38,35 +43,36 @@ const Login = () => {
   return (
     <>
       <Container>
-        <Title>Login</Title>
+        <Title>Reset password</Title>
         {error && <ErrorText>{error}</ErrorText>}
         <Form onSubmit={handleSubmit}>
           <FormItem>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="otp">OTP</Label>
             <Input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Enter otp"
+              id="otp"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
             />
           </FormItem>
           <FormItem>
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="newPassword">New Password</Label>
             <Input
-              type="password"
+              type="text"
+              placeholder="Enter new password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
             />
           </FormItem>
-          <Button type="submit">Log In</Button>
+          <Button type="submit">Reset</Button>
         </Form>
-        <Link className="forgot" to={"/forgot"}>Forgot your password?</Link>
+        {successMessage && <SuccessText>{successMessage}</SuccessText>}
       </Container>
     </>
   );
 };
-
 
 const Container = styled.div`
   max-width: 400px;
@@ -121,4 +127,9 @@ const ErrorText = styled.p`
   color: red;
 `;
 
-export default Login;
+const SuccessText = styled.p`
+  margin-top: 10px;
+  color: #1ea44f;
+`;
+
+export default Reset;

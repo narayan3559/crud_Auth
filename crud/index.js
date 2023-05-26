@@ -49,11 +49,11 @@ app.post("/login", async (req, res) => {
             res.send({ user, auth: token })
           })
         } else {
-          res.send("incorrect credentials")
+          res.status(400).json({ error: "Incorrect credentials" });
         }
       })
     } else {
-      res.send("user not found")
+      res.status(400).json({ error: "User not found" });
     }
   }else {
     res.status(400)
@@ -70,6 +70,7 @@ app.post("/changePassword", async (req, res) => {
   }
 
   if (oldPassword && newPassword) {
+    console.log("newpass:",newPassword);
     bcrypt.compare(oldPassword, user.password, async (err, result) => {
       if (err) {
         res.send("Something went wrong, try again!");
@@ -87,7 +88,7 @@ app.post("/changePassword", async (req, res) => {
           password: newpass,
         });
 
-        res.status(200).json("Changed Password Succesfully");
+        res.status(200).json({ message: "Changed Password Successfully"});
       } else {
         res.status(400).json({ error: "Incorrect old password" });
       }
@@ -146,12 +147,12 @@ app.post("/forgot", async (req, res) => {
   })
 })
 
-app.put("/forgot/reset/:resetToken", async (req, res) => {
+app.post("/forgot/reset/:resetToken", async (req, res) => {
   const token = req.params.resetToken
   let resetpass = req.body.newPassword
   const salt = await bcrypt.genSalt();
   resetpass = await bcrypt.hash(resetpass, salt)
-  console.log(token)
+  console.log("g",token)
   const user = await user_model.findOne({ reset_token: token })
   if (!user) {
     return res.status(400).json({ error: "Invalid link" })
@@ -178,8 +179,7 @@ app.put("/forgot/reset/:resetToken", async (req, res) => {
       if (data == null) {
         res.send("data not found")
       } else {
-        // res.send(data)
-        res.send("Reset password Successfuly")
+        res.status(200).json({ message: "Reset password Successfuly" });
       }
     })
     .catch((err) => {
@@ -234,35 +234,43 @@ app.put("/update/:username", (req, res) => {
     });
 })
 
-app.post('/fetch/', (req, res) => {
-  let fetchusername = req.body.username
+app.post("/fetch", (req, res) => {
+  const fetchusername = req.body.username;
+  console.log('a',fetchusername);
   user_model
     .find({ username: fetchusername })
     .then((data) => {
+      console.log("l", data);
       if (data.length == 0) {
-        res.send("data does not exist")
+        console.log("null");
+        res.status(400).json({ error: "user not found" });
       } else {
-        res.send(data)
+        console.log("d-", data);
+        res.send(data);
       }
     })
     .catch((err) => {
-      console.log(err)
+      res.status(400).json({ error: "Something went wrong, try again later" });
+      console.log(err);
     });
-})
+});
 
-app.delete("/delete/:username", (req, res) => {
-  let deleteusername = req.params.username
+app.delete("/delete", (req, res) => {
+  const deleteusername = req.body.username
+  console.log(deleteusername);
   user_model
-    .findOneAndDelete({ username:deleteusername })
+    .findOneAndDelete({ username: deleteusername })
     .then((data) => {
       if (data == null) {
-        res.send("Cant delete, data not found")
+        res.status(400).json({ error: "user does not exist" });
       } else {
-        res.send('deleted');
+        console.log("deleted");
+        res.status(200).json({ message: "Deleted Succesfully" });
       }
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
+      res.status(400).json({ error: "Something went wrong" });
     });
 })
 

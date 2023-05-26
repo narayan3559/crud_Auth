@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const View = () => {
   const [username, setUsername] = useState("");
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate
 
   const handleFetch = async (e) => {
     e.preventDefault();
@@ -17,12 +19,44 @@ const View = () => {
         },
         body: JSON.stringify({ username }),
       });
-      console.log("resp:",response)
       if (response.ok) {
         const data = await response.json();
         setUserData(data);
+        setError("");
       } else {
-        const errorData = await response.text();
+        const errorData = await response.json();
+        setError(errorData.error);
+        setUserData(null)
+      }
+    } catch (error) {
+      console.error(error);
+      setError("An error occurred. Please try again later.");
+      setUserData(null)
+    }
+  };
+
+  const handleDelete = async (deleteUsername) => {
+    // e.preventDefault();
+    console.log('del',username);
+    try {
+      const response = await fetch("http://localhost:8000/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: deleteUsername }),
+      });
+      console.log("resp:", response);
+      if (response.ok) {
+        const data = await response.json();
+        setUserData((prevData) =>
+          prevData.filter((user) => user.username !== deleteUsername)
+        );
+        setError("");
+        localStorage.removeItem('userdata')
+        navigate('/')
+      } else {
+        const errorData = response.text();
         setError(errorData);
       }
     } catch (error) {
@@ -56,10 +90,13 @@ const View = () => {
         <UserList>
           {userData.map((user) => (
             <UserItem key={user._id}>
-              <strong>Username:</strong> {user.username}
-              <br />
               <strong>Email:</strong> {user.email}
-              {/* Add other user data fields as needed */}
+              <br />
+              <strong>Name:</strong> {user.name}
+              <br />
+              <Button onClick={() => handleDelete(user.username)}>
+                Delete User
+              </Button>
             </UserItem>
           ))}
         </UserList>
