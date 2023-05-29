@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Changepassword = () => {
   const [email, setEmail] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate()
 
 
@@ -26,18 +25,14 @@ const Changepassword = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setSuccessMessage(data.message)
-        setErrorMessage("")
+        toast.success(data.message)
         localStorage.removeItem('userdata')
         navigate('/')
       } else {
-        setErrorMessage(data.error);
-        setSuccessMessage("");
+        toast.error(data.error)
       }
     } catch (error) {
       console.error(error);
-      setErrorMessage("An error occurred. Please try again later.");
-      setSuccessMessage("");
     }
   };
 
@@ -65,8 +60,6 @@ const Changepassword = () => {
         />
         <Button type="submit">Change Password</Button>
       </Form>
-      {successMessage && <SuccessText>{successMessage}</SuccessText>}
-      {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
     </Container>
   );
 };
@@ -106,16 +99,6 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-`;
-
-const ErrorText = styled.p`
-  margin-top: 10px;
-  color: red;
-`;
-
-const SuccessText = styled.p`
-  margin-top: 10px;
-  color: #1ea44f;
 `;
 
 

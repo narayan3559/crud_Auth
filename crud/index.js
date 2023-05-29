@@ -16,19 +16,19 @@ app.use(cors())
 
 app.post("/register", async(req, res) => {
   const { email } = req.body;
+  const { username } = req.body;
   console.log("regis", req.body.password);
   const user = await user_model.findOne({ email })
   if (user) {
     return res.status(400).json({ error: "User Already Exist" })
   }
-  const { username } = req.body;
   const userr = await user_model.findOne({ username });
   if (userr) {
-    return res.status(400).json({ error: "this username is taken, try with diffrent username" })
+    return res.status(400).json({ error: "this username is taken already" })
   }
   const data = new user_model(req.body)
   const value = await data.save()
-  res.json(value)
+  res.status(200).json({ message: "Registered Succesfully" });
 })
 
 app.post("/login", async (req, res) => {
@@ -143,7 +143,7 @@ app.post("/forgot", async (req, res) => {
     }
     console.log("Message sent successfully!")
     console.log('Server responded with "%s"', info.response)
-    res.json({ message: "Password reset link sent" })
+    res.status(200).json({ message: "Password reset link sent" })
   })
 })
 

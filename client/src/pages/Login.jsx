@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, Link   } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -22,16 +22,14 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         localStorage.setItem('userdata', JSON.stringify(data))
         navigate('/')
       } else {
         const errorData = await response.json();
-        setError(errorData.error);
+        toast.error(errorData.error)
       }
     } catch (error) {
       console.error(error);
-      setError("An error occurred. Please try again later.");
     }
   };
 
@@ -39,7 +37,6 @@ const Login = () => {
     <>
       <Container>
         <Title>Login</Title>
-        {error && <ErrorText>{error}</ErrorText>}
         <Form onSubmit={handleSubmit}>
           <FormItem>
             <Label htmlFor="email">Email</Label>
@@ -114,11 +111,6 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-`;
-
-const ErrorText = styled.p`
-  margin-top: 10px;
-  color: red;
 `;
 
 export default Login;

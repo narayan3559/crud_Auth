@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const Forgot = () => {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,16 +19,14 @@ const Forgot = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setEmail('')
-        setSuccessMessage(data.message);
+        toast.success(data.message)
         console.log(data);
       } else {
         const errorData = await response.json();
-        setError(errorData.error);
+        toast.error(errorData.error)
       }
     } catch (error) {
       console.error(error);
-      setError("An error occurred. Please try again later.");
     }
   };
 
@@ -38,7 +35,6 @@ const Forgot = () => {
       <Container>
         <Title>Forgot Password</Title>
         <Comment>A password reset link will be sent to your email</Comment>
-        {error && <ErrorText>{error}</ErrorText>}
         <Form onSubmit={handleSubmit}>
           <FormItem>
             <Label htmlFor="email">Email</Label>
@@ -52,7 +48,6 @@ const Forgot = () => {
           </FormItem>
           <Button type="submit">Send OTP</Button>
         </Form>
-        {successMessage && <SuccessText>{successMessage}</SuccessText>}
       </Container>
     </>
   );
@@ -110,16 +105,6 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-`;
-
-const SuccessText = styled.p`
-  margin-top: 10px;
-  color: #1ea44f;
-`;
-
-const ErrorText = styled.p`
-  margin-top: 10px;
-  color: red;
 `;
 
 export default Forgot;

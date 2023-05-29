@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Reset = () => {
   const [newPassword, setNewPassword] = useState("");
   const [otp, setOtp] = useState("");
-  const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
   const token = useParams();
 
@@ -27,16 +26,15 @@ const Reset = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setSuccessMessage(data.message);
         console.log(data);
+        toast.success(data.message)
         navigate("/login");
       } else {
         const errorData = await response.json();
-        setError(errorData.error);
+        toast.error(errorData.error)
       }
     } catch (error) {
       console.error(error);
-      setError("An error occurred. Please try again later.");
     }
   };
 
@@ -44,7 +42,6 @@ const Reset = () => {
     <>
       <Container>
         <Title>Reset password</Title>
-        {error && <ErrorText>{error}</ErrorText>}
         <Form onSubmit={handleSubmit}>
           <FormItem>
             <Label htmlFor="otp">OTP</Label>
@@ -68,7 +65,6 @@ const Reset = () => {
           </FormItem>
           <Button type="submit">Reset</Button>
         </Form>
-        {successMessage && <SuccessText>{successMessage}</SuccessText>}
       </Container>
     </>
   );
@@ -122,14 +118,5 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const ErrorText = styled.p`
-  margin-top: 10px;
-  color: red;
-`;
-
-const SuccessText = styled.p`
-  margin-top: 10px;
-  color: #1ea44f;
-`;
 
 export default Reset;

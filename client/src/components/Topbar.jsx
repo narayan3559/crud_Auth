@@ -16,23 +16,12 @@ const Topbar = () => {
     <div className="Topbar">
       <div>
         <ul className="nav_ul2">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+          <li><Link to="/">Home</Link></li>
           {auth ? (
             <>
-              <li>
-                <Link to="/fetch">View</Link>
-              </li>
-              <li>
-                <Link to="/update">Edit</Link>
-              </li>
-              {/* <li>
-                <Link to="/delete">Delete</Link>
-              </li> */}
-              <li>
-                <Link to="/changePassword">Change Password</Link>
-              </li>
+              <li><Link to="/fetch">View</Link></li>
+              <li><Link to="/update">Edit</Link></li>
+              <li><Link to="/changePassword">Change Password</Link></li>
             </>
           ) : null}
         </ul>
@@ -41,18 +30,12 @@ const Topbar = () => {
         <ul className="nav_ul2">
           {!auth ? (
             <>
-              <li>
-                <Link to={"/signup"}>Sign Up</Link>
-              </li>
-              <li>
-                <Link to={"/login"}>Login</Link>
-              </li>
+              <li><Link to={"/signup"}>Sign Up</Link></li>
+              <li><Link to={"/login"}>Login</Link></li>
             </>
           ) : (
             <li>
-              <Link onClick={() => logout()} to={"/"}>
-                Logout
-              </Link>
+              <Link onClick={() => logout()} to={"/"}>Logout</Link>
             </li>
           )}
         </ul>

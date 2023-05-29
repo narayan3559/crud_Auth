@@ -6,8 +6,9 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 import View from './pages/View'
 import Edit from './pages/Edit'
-// import Delete from './pages/Delete'
 import Changepassword from './pages/Changepassword'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Home from './pages/Home'
 import Topbar from './components/Topbar'
 import Forgot from './pages/Forgot'
@@ -17,13 +18,13 @@ const App = () => {
   return (
     <div className="app">
       <BrowserRouter>
+      <ToastContainer />
         <Topbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route element={<PrivateCom />}>
             <Route path="/fetch" element={<View />} />
             <Route path="/update" element={<Edit />} />
-            {/* <Route path="/delete" element={<Delete />} /> */}
             <Route path="/changePassword" element={<Changepassword />} />
           </Route>
           <Route path="/forgot" element={<Forgot />} />

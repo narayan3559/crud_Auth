@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const View = () => {
   const [username, setUsername] = useState("");
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   const handleFetch = async (e) => {
     e.preventDefault();
@@ -49,9 +50,7 @@ const View = () => {
       console.log("resp:", response);
       if (response.ok) {
         const data = await response.json();
-        setUserData((prevData) =>
-          prevData.filter((user) => user.username !== deleteUsername)
-        );
+        toast.success(data.message);
         setError("");
         localStorage.removeItem('userdata')
         navigate('/')
