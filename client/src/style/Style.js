@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export const Container = styled.div`
   max-width: 400px;
@@ -54,4 +55,40 @@ export const Button = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+`;
+
+export const ErrorText = styled.p`
+  margin-top: 10px;
+  color: red;
+`;
+
+export const UserList = styled.ul`
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+`;
+
+export const UserItem = styled.li`
+  margin-bottom: 20px;
+  color: white;
+`;
+
+export const Comment = styled.div`
+  font-size: 16px;
+  color: white;
+  margin-bottom: 10px;
+`;
+
+export const ButtonText = styled.span`
+  margin-right: 1px;
+`;
+
+export const LoadingIcon = styled(AiOutlineLoading)`
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;

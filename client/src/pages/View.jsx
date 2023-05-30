@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { toast } from "react-toastify";
+import * as Styled from "./../style/Style.js";
+
 
 const View = () => {
   const [username, setUsername] = useState("");
@@ -50,7 +51,7 @@ const View = () => {
       console.log("resp:", response);
       if (response.ok) {
         const data = await response.json();
-        toast.success(data.message);
+        toast.success(data.message, { autoClose: 2000 });
         setError("");
         localStorage.removeItem('userdata')
         navigate('/')
@@ -70,110 +71,40 @@ const View = () => {
   }, [username]);
 
   return (
-    <Container>
-      <Title>User Fetch</Title>
-      {error && <ErrorText>{error}</ErrorText>}
-      <Form onSubmit={handleFetch}>
-        <FormItem>
-          <Label htmlFor="username">Username</Label>
-          <Input
+    <Styled.Container>
+      <Styled.Title>User Fetch</Styled.Title>
+      {error && <Styled.ErrorText>{error}</Styled.ErrorText>}
+      <Styled.Form onSubmit={handleFetch}>
+        <Styled.FormItem>
+          <Styled.Label htmlFor="username">Username</Styled.Label>
+          <Styled.Input
             type="text"
             required
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </FormItem>
-        <Button type="submit">Fetch User</Button>
-      </Form>
+        </Styled.FormItem>
+        <Styled.Button type="submit">Fetch User</Styled.Button>
+      </Styled.Form>
       {userData && (
-        <UserList>
+        <Styled.UserList>
           {userData.map((user) => (
-            <UserItem key={user._id}>
+            <Styled.UserItem key={user._id}>
               <strong>Email:</strong> {user.email}
               <br />
               <strong>Name:</strong> {user.name}
               <br />
-              <Button onClick={() => handleDelete(user.username)}>
+              <Styled.Button onClick={() => handleDelete(user.username)}>
                 Delete User
-              </Button>
-            </UserItem>
+              </Styled.Button>
+            </Styled.UserItem>
           ))}
-        </UserList>
+        </Styled.UserList>
       )}
-    </Container>
+    </Styled.Container>
   );
 };
 
-const Container = styled.div`
-  max-width: 400px;
-  margin-top: 120px;
-  margin-left: 80px;
-  padding: 20px;
-  background-color: #000000a9;
-  border-radius: 8px;
-`;
-
-const Title = styled.h1`
-  font-size: 24px;
-  color: white;
-  margin-bottom: 20px;
-  text-align: center;
-`;
-
-const Form = styled.form`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const FormItem = styled.div`
-  margin-bottom: 15px;
-`;
-
-const Label = styled.label`
-  font-size: 14px;
-  color: white;
-  font-weight: 600;
-  display: inline-flex;
-  width: 100px;
-`;
-
-const Input = styled.input`
-  padding: 8px;
-  opacity: 0.5;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const Button = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 16px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-  background-color: #363636b8;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
-
-const ErrorText = styled.p`
-  margin-top: 10px;
-  color: red;
-`;
-
-const UserList = styled.ul`
-  margin-top: 20px;
-  list-style-type: none;
-  padding: 0;
-`;
-
-const UserItem = styled.li`
-  margin-bottom: 20px;
-  color: white;
-`;
 
 export default View;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import * as Styled from "./../style/Style.js";
 
 const Reset = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -27,11 +27,11 @@ const Reset = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        toast.success(data.message)
+        toast.success(data.message, { autoClose: 2000 });
         navigate("/login");
       } else {
         const errorData = await response.json();
-        toast.error(errorData.error)
+        toast.error(errorData.error, { autoClose: 2000 });
       }
     } catch (error) {
       console.error(error);
@@ -40,83 +40,36 @@ const Reset = () => {
 
   return (
     <>
-      <Container>
-        <Title>Reset password</Title>
-        <Form onSubmit={handleSubmit}>
-          <FormItem>
-            <Label htmlFor="otp">OTP</Label>
-            <Input
+      <Styled.Container>
+        <Styled.Title>Reset password</Styled.Title>
+        <Styled.Form onSubmit={handleSubmit}>
+          <Styled.FormItem>
+            <Styled.Label htmlFor="otp">OTP</Styled.Label>
+            <Styled.Input
               type="text"
               placeholder="Enter otp"
               id="otp"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
             />
-          </FormItem>
-          <FormItem>
-            <Label htmlFor="newPassword">New Password</Label>
-            <Input
-              type="text"
+          </Styled.FormItem>
+          <Styled.FormItem>
+            <Styled.Label htmlFor="newPassword">New Password</Styled.Label>
+            <Styled.Input
+              type="password"
               placeholder="Enter new password"
               id="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
-          </FormItem>
-          <Button type="submit">Reset</Button>
-        </Form>
-      </Container>
+          </Styled.FormItem>
+          <Styled.Button type="submit">Reset</Styled.Button>
+        </Styled.Form>
+      </Styled.Container>
     </>
   );
 };
 
-const Container = styled.div`
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border-radius: 8px;
-`;
-
-const Title = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const FormItem = styled.div`
-  margin-bottom: 15px;
-`;
-
-const Label = styled.label`
-  font-size: 16px;
-  font-weight: 600;
-  display: inline-flex;
-  width: 130px;
-`;
-
-const Input = styled.input`
-  padding: 8px;
-  border: 1px solid #ccc;
-  width: 240px;
-  border-radius: 4px;
-`;
-
-const Button = styled.button`
-  padding: 10px 16px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-  background-color: #4285f4;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
 
 
 export default Reset;

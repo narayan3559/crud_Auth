@@ -24,7 +24,7 @@ const Signup = () => {
 
       if (response.ok) {
         const data = await response.json();
-        toast.success(data.message);
+        toast.success(data.message, { autoClose: 2000 });
         navigate("/login");
       } else {
         const errorData = await response.json();
