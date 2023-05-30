@@ -20,7 +20,7 @@ const Topbar = () => {
           {auth ? (
             <>
               <li><Link to="/fetch">View</Link></li>
-              <li><Link to="/update">Edit</Link></li>
+              <li><Link to="/update">Update</Link></li>
               <li><Link to="/changePassword">Change Password</Link></li>
             </>
           ) : null}

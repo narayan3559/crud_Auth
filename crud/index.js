@@ -37,7 +37,6 @@ app.post("/login", async (req, res) => {
     const user = await user_model.findOne({ email: req.body.email })
     if (user) {
       let epass = req.body.password
-      // console.log(epass)
       bcrypt.compare(epass, user.password, (err, result) => {
         if (err) {
           res.send("something went wrong")
@@ -49,7 +48,7 @@ app.post("/login", async (req, res) => {
             res.send({ user, auth: token })
           })
         } else {
-          res.status(400).json({ error: "Incorrect credentials" });
+          res.status(400).json({ error: "Incorrect credentials" })
         }
       })
     } else {
@@ -209,29 +208,40 @@ app.post("/private", verifyToken, async (req, res) => {
   res.send("Private route accessed");
 })
 
-app.put("/update/:username", (req, res) => {
-  let updateusername = req.params.username
-  let updateName = req.body.name
-  user_model
+app.post("/update/", async (req, res) => {
+  const { email, username, name, auth } = req.body
+  if (username && name) {
+    const user1 = await user_model.findOne({ username: username });
+    if (user1) {
+      return res.status(400).json({ error: "this username is already taken" })
+    }
+    user_model
     .findOneAndUpdate(
-      { username: updateusername },
+      { email: email },
       {
         $set: {
-          name: updateName,
+          username: username,
+          name: name,
         },
       },      
     )
-    .then((data) => {
-      if (data == null) {
-        res.send("data not found")
+    .then((user) => {
+      if (user == null) {
+        res.status(400).json({ error: "user not found" });
       } else {
-        // res.send(data)
-        res.send("success")
+        user_model
+          .findOne({ email })
+          .then((user) =>
+            res.status(200).json({ message: "Updated Succesfully", user: {user, auth} })
+          )
       }
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+  } else {
+    res.status(400).json({ error: "required feild cant be empty" })
+  }
 })
 
 app.post("/fetch", (req, res) => {

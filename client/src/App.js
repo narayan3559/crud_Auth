@@ -5,7 +5,7 @@ import PrivateCom from './components/PrivateCom'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import View from './pages/View'
-import Edit from './pages/Edit'
+import Update from './pages/Update'
 import Changepassword from './pages/Changepassword'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,7 +24,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route element={<PrivateCom />}>
             <Route path="/fetch" element={<View />} />
-            <Route path="/update" element={<Edit />} />
+            <Route path="/update" element={<Update />} />
             <Route path="/changePassword" element={<Changepassword />} />
           </Route>
           <Route path="/forgot" element={<Forgot />} />
