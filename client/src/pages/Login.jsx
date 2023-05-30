@@ -67,7 +67,6 @@ const Login = () => {
 
 const Container = styled.div`
   max-width: 400px;
-  /* margin: 20px auto; */
   margin-top: 120px;
   margin-left: 80px;
   padding: 20px;

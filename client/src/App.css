@@ -31,5 +31,5 @@ a:-webkit-any-link{
 .forgot {
   display: flex;
   margin-top: 15px !important;
-  color: rgb(55, 55, 175) !important;
+  color: rgb(0, 0, 0) !important;
 }
