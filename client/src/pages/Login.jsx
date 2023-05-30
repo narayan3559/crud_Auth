@@ -58,7 +58,7 @@ const Login = () => {
           </FormItem>
           <Button type="submit">Log In</Button>
         </Form>
-        <Link className="forgot" to={"/forgot"}>Forgot your password?</Link>
+        <Link className="forgot" to={"/forgot"}>Forgot password?</Link>
       </Container>
     </>
   );
@@ -67,13 +67,16 @@ const Login = () => {
 
 const Container = styled.div`
   max-width: 400px;
-  margin: 0 auto;
+  /* margin: 20px auto; */
+  margin-top: 120px;
+  margin-left: 80px;
   padding: 20px;
-  background-color: #f2f2f2;
+  background-color: #000000a9;
   border-radius: 8px;
 `;
 
 const Title = styled.h1`
+  color: white;
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
@@ -90,6 +93,7 @@ const FormItem = styled.div`
 
 const Label = styled.label`
   font-size: 16px;
+  color: white;
   font-weight: 600;
   display: inline-flex;
   width: 130px;
@@ -98,16 +102,20 @@ const Label = styled.label`
 const Input = styled.input`
   padding: 8px;
   border: 1px solid #ccc;
+  opacity: 0.5;
   width: 240px;
   border-radius: 4px;
 `;
 
 const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 16px;
   font-size: 16px;
   font-weight: 600;
   color: #fff;
-  background-color: #4285f4;
+  background-color: #363636b8;
   border: none;
   border-radius: 4px;
   cursor: pointer;

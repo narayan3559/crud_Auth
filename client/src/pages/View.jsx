@@ -78,6 +78,7 @@ const View = () => {
           <Label htmlFor="username">Username</Label>
           <Input
             type="text"
+            required
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -106,14 +107,16 @@ const View = () => {
 
 const Container = styled.div`
   max-width: 400px;
-  margin: 0 auto;
+  margin-top: 120px;
+  margin-left: 80px;
   padding: 20px;
-  background-color: #e1e1e1;
+  background-color: #000000a9;
   border-radius: 8px;
 `;
 
 const Title = styled.h1`
   font-size: 24px;
+  color: white;
   margin-bottom: 20px;
   text-align: center;
 `;
@@ -130,6 +133,7 @@ const FormItem = styled.div`
 
 const Label = styled.label`
   font-size: 14px;
+  color: white;
   font-weight: 600;
   display: inline-flex;
   width: 100px;
@@ -137,16 +141,20 @@ const Label = styled.label`
 
 const Input = styled.input`
   padding: 8px;
+  opacity: 0.5;
   border: 1px solid #ccc;
   border-radius: 4px;
 `;
 
 const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 16px;
   font-size: 16px;
   font-weight: 600;
   color: #fff;
-  background-color: #4285f4;
+  background-color: #363636b8;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -164,7 +172,8 @@ const UserList = styled.ul`
 `;
 
 const UserItem = styled.li`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  color: white;
 `;
 
 export default View;

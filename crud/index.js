@@ -246,16 +246,12 @@ app.post("/update/", async (req, res) => {
 
 app.post("/fetch", (req, res) => {
   const fetchusername = req.body.username;
-  console.log('a',fetchusername);
   user_model
     .find({ username: fetchusername })
     .then((data) => {
-      console.log("l", data);
       if (data.length == 0) {
-        console.log("null");
         res.status(400).json({ error: "user not found" });
       } else {
-        console.log("d-", data);
         res.send(data);
       }
     })

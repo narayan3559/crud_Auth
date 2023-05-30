@@ -84,16 +84,17 @@ const Signup = () => {
 };
 
 const Container = styled.div`
-  max-width: 600px;
-  margin: 20px auto;
-  /* margin-top: 20px; */
+  max-width: 400px;
+  margin-top: 120px;
+  margin-left: 80px;
   padding: 20px;
-  background-color: #f2f2f2;
+  background-color: #000000a9;
   border-radius: 8px;
 `;
 
 const Title = styled.h1`
   font-size: 24px;
+  color: white;
   margin-bottom: 20px;
   text-align: center;
 `;
@@ -111,6 +112,7 @@ const FormItem = styled.div`
 const Label = styled.label`
   font-size: 16px;
   font-weight: 600;
+  color: white;
   display: inline-flex;
   width: 130px;
 `;
@@ -118,16 +120,20 @@ const Label = styled.label`
 const Input = styled.input`
   padding: 8px;
   border: 1px solid #ccc;
+  opacity: 0.5;
   border-radius: 4px;
   width: 240px;
 `;
 
 const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 16px;
   font-size: 16px;
   font-weight: 600;
   color: #fff;
-  background-color: #4285f4;
+  background-color: #363636b8;
   border: none;
   border-radius: 4px;
   cursor: pointer;

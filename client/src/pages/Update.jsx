@@ -4,8 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Update = () => {
-  const local = JSON.parse(localStorage.getItem("userdata")).data;
-  console.log(local);
+  const local = JSON.parse(localStorage.getItem("userdata")).user;
   const auth = JSON.parse(localStorage.getItem("userdata")).auth
   const [username, setUsername] = useState(local.username)
   const [name, setName] = useState(local.name);
@@ -45,7 +44,7 @@ const Update = () => {
       <Form onSubmit={handleSubmit}>
         <FormItem>
           <Label>Email</Label>
-          <Input type="email" value={email} disabled />
+          <Input style={{color: "white"}} type="email" value={email} disabled />
         </FormItem>
         <FormItem>
           <Label>Username</Label>
@@ -72,16 +71,18 @@ const Update = () => {
 };
 
 const Container = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 400px;
+  margin-top: 120px;
+  margin-left: 80px;
   padding: 20px;
-  background-color: #f2f2f2;
+  background-color: #000000a9;
   border-radius: 8px;
 `;
 
 const Title = styled.h1`
   font-size: 24px;
   margin-bottom: 20px;
+  color: white;
   text-align: center;
 `;
 
@@ -97,6 +98,7 @@ const FormItem = styled.div`
 
 const Label = styled.label`
   font-size: 16px;
+  color: white;
   font-weight: 600;
   display: inline-flex;
   width: 130px;
@@ -104,17 +106,21 @@ const Label = styled.label`
 
 const Input = styled.input`
   padding: 8px;
+  opacity: 0.6;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 240px;
 `;
 
 const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px 16px;
   font-size: 16px;
   font-weight: 600;
   color: #fff;
-  background-color: #4285f4;
+  background-color: #363636b8;
   border: none;
   border-radius: 4px;
   cursor: pointer;

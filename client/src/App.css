@@ -4,13 +4,14 @@ body{
 }
 .app {
   height: 100vh !important;
-  background-color: #80a0a1;
+  background: url(./asset/829031.jpg) no-repeat fixed center;
+  background-size: cover;
 }
 
 /* topbar */
 
 .Topbar {
-  background-color: darkslategray;
+  background-color: #191c1c77;
   height: 60px;
   display: flex;
   justify-content: space-between;
