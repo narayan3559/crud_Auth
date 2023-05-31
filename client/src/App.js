@@ -16,7 +16,6 @@ import Reset from './pages/Reset'
 import Particlebg from './components/Particlebg'
 import * as Styled from "./style/Style.js";
 
-
 const App = () => {
   return (
     <div className="app">
@@ -28,7 +27,6 @@ const App = () => {
         <Topbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/" element={<h1>home</h1>} /> */}
           <Route element={<PrivateCom />}>
             <Route path="/fetch" element={<View />} />
             <Route path="/update" element={<Update />} />

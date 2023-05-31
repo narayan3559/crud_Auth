@@ -46,6 +46,7 @@ const Signup = () => {
             <Styled.Input
               type="email"
               id="email"
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -55,6 +56,7 @@ const Signup = () => {
             <Styled.Input
               type="text"
               id="name"
+              required
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -64,6 +66,7 @@ const Signup = () => {
             <Styled.Input
               type="text"
               id="username"
+              required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -73,6 +76,7 @@ const Signup = () => {
             <Styled.Input
               type="password"
               id="password"
+              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
