@@ -24,7 +24,7 @@ const Signup = () => {
 
       if (response.ok) {
         const data = await response.json();
-        toast.success(data.message, { autoClose: 2000 });
+        toast.success(data.message);
         navigate("/login");
       } else {
         const errorData = await response.json();
@@ -42,6 +42,15 @@ const Signup = () => {
         <Styled.Title>Signup</Styled.Title>
         <Styled.Form onSubmit={handleSubmit}>
           <Styled.FormItem>
+            <Styled.Label htmlFor="email">Email</Styled.Label>
+            <Styled.Input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Styled.FormItem>
+          <Styled.FormItem>
             <Styled.Label htmlFor="name">Name</Styled.Label>
             <Styled.Input
               type="text"
@@ -57,15 +66,6 @@ const Signup = () => {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-            />
-          </Styled.FormItem>
-          <Styled.FormItem>
-            <Styled.Label htmlFor="email">Email</Styled.Label>
-            <Styled.Input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
             />
           </Styled.FormItem>
           <Styled.FormItem>

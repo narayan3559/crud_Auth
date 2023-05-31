@@ -3,8 +3,9 @@ import { AiOutlineLoading } from "react-icons/ai";
 
 export const Container = styled.div`
   max-width: 400px;
-  margin-top: 120px;
-  margin-left: 80px;
+  margin-top: 100px;
+  margin-left: 60px;
+  z-index: 2;
   padding: 20px;
   background-color: #000000a9;
   border-radius: 8px;
@@ -92,3 +93,5 @@ export const LoadingIcon = styled(AiOutlineLoading)`
     }
   }
 `;
+
+export const Particlediv = styled.div``;

@@ -26,10 +26,10 @@ const Forgot = () => {
         const data = await response.json();
         setEmail('')
         setCommentText('A Password Reset link Sent. Go to your email to reset.')
-        toast.success(data.message, { autoClose: 2000 });
+        toast.success(data.message);
       } else {
         const errorData = await response.json();
-        toast.error(errorData.error, { autoClose: 2000 });
+        toast.error(errorData.error);
       }
     } catch (error) {
       console.error(error);
@@ -60,7 +60,7 @@ const Forgot = () => {
                 <Styled.LoadingIcon />
               </>
             ) : (
-              <Styled.ButtonText>Send OTP</Styled.ButtonText>
+              <Styled.ButtonText>Send</Styled.ButtonText>
             )}
           </Styled.Button>
         </Styled.Form>

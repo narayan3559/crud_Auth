@@ -14,6 +14,7 @@ body{
   background-color: #191c1c77;
   height: 60px;
   display: flex;
+  margin-top: 0px !important;
   justify-content: space-between;
 }
 

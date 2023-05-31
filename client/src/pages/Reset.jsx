@@ -27,11 +27,11 @@ const Reset = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        toast.success(data.message, { autoClose: 2000 });
+        toast.success(data.message);
         navigate("/login");
       } else {
         const errorData = await response.json();
-        toast.error(errorData.error, { autoClose: 2000 });
+        toast.error(errorData.error);
       }
     } catch (error) {
       console.error(error);

@@ -13,15 +13,22 @@ import Home from './pages/Home'
 import Topbar from './components/Topbar'
 import Forgot from './pages/Forgot'
 import Reset from './pages/Reset'
+import Particlebg from './components/Particlebg'
+import * as Styled from "./style/Style.js";
+
 
 const App = () => {
   return (
     <div className="app">
+      <Styled.Particlediv>
+        <Particlebg />
+      </Styled.Particlediv>
       <BrowserRouter>
-      <ToastContainer />
+        <ToastContainer theme="dark" autoClose={1500} position="top-center" />
         <Topbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<h1>home</h1>} /> */}
           <Route element={<PrivateCom />}>
             <Route path="/fetch" element={<View />} />
             <Route path="/update" element={<Update />} />

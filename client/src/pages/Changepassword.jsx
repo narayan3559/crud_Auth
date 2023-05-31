@@ -25,11 +25,11 @@ const Changepassword = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message, { autoClose: 2000 });
+        toast.success(data.message);
         localStorage.removeItem('userdata')
         navigate('/')
       } else {
-        toast.error(data.error, { autoClose: 2000 });
+        toast.error(data.error);
       }
     } catch (error) {
       console.error(error);

@@ -51,7 +51,7 @@ const View = () => {
       console.log("resp:", response);
       if (response.ok) {
         const data = await response.json();
-        toast.success(data.message, { autoClose: 2000 });
+        toast.success(data.message);
         setError("");
         localStorage.removeItem('userdata')
         navigate('/')
