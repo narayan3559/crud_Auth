@@ -259,7 +259,7 @@ app.post("/fetch", (req, res) => {
       res.status(400).json({ error: "Something went wrong, try again later" });
       console.log(err);
     });
-});
+})
 
 app.delete("/delete", (req, res) => {
   const deleteusername = req.body.username
