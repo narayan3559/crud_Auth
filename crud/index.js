@@ -17,23 +17,22 @@ app.use(cors())
 app.post("/register", async(req, res) => {
   const { email } = req.body;
   const { username } = req.body;
-  console.log("regis", req.body.password);
   const user = await user_model.findOne({ email })
   if (user) {
-    return res.status(400).json({ error: "User Already Exist" })
+    return res.status(400).json({ error: "This email is already registered" })
   }
   const userr = await user_model.findOne({ username });
   if (userr) {
-    return res.status(400).json({ error: "this username is taken already" })
+    return res.status(400).json({ error: "This username is taken already" })
   }
   const data = new user_model(req.body)
   const value = await data.save()
-  res.status(200).json({ message: "Registered Succesfully" });
+  res.status(200).json({ message: "Registered Succesfully" })
+  console.log("regis", req.body.password)
 })
 
 app.post("/login", async (req, res) => {
   if (req.body.password && req.body.email) {
-    console.log("login",req.body.password);
     const user = await user_model.findOne({ email: req.body.email })
     if (user) {
       let epass = req.body.password
@@ -45,14 +44,15 @@ app.post("/login", async (req, res) => {
             if (err) {
               res.send("something went wrong")
             }
+            console.log("login", req.body.password);
             res.send({ user, auth: token })
           })
         } else {
-          res.status(400).json({ error: "Incorrect credentials" })
+          res.status(400).json({ error: "Incorrect email and/or password" })
         }
       })
     } else {
-      res.status(400).json({ error: "User not found" });
+      res.status(400).json({ error: "Incorrect email and/or password" });
     }
   }else {
     res.status(400)

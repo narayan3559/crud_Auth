@@ -4,7 +4,7 @@ body{
 }
 .app {
   height: 100vh !important;
-  background: url(./asset/829031.jpg) no-repeat fixed center;
+  background: url(./asset/images/829031.jpg) no-repeat fixed center;
   background-size: cover;
 }
 

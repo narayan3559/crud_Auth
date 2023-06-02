@@ -40,7 +40,7 @@ const Update = () => {
 
   return (
     <Styled.Container>
-      <Styled.Title>Update User</Styled.Title>
+      <Styled.Title>Update</Styled.Title>
       <Styled.Form onSubmit={handleSubmit}>
         <Styled.FormItem>
           <Styled.Label>Email</Styled.Label>
